@@ -35,6 +35,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/swagger-ui/**",
+                                "/v3/**").permitAll()
                         .requestMatchers("/deal/search").hasAnyAuthority(
                                 RolesEnum.CREDIT_USER.name(),
                                 RolesEnum.OVERDRAFT_USER.name(),
